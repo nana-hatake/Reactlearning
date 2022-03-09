@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件实例的状态属性</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+<!--引入react核心库-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入react核心库-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<script type="text/babel">
+    class Weather extends React.Component{
+      constructor(props) {
+        super(props);
+        //初始化状态
+        this.state = {isHot:false}
+      }
+      render(){
+       //读取状态
+        const {isHot}=this.state;
+        return<h1 onClick={demo}>今天天气很{isHot?'炎热':'凉爽'},今天有大风</h1>
+
+      }
+    }
+    ReactDOM.render(<Weather/>,document.getElementById('test'))
+  function demo(){
+    console.log('标题被点击了');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test1"></div>
+<div id ="test2"></div>
+<div id ="test3"></div>
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+  class Person extends React.Component{
+    render(){
+      const{name,age,sex}=this.props;
+      return(
+              <ul>
+                <li>姓名：{name}</li>
+                <li>性别：{sex}</li>
+                <li>年龄：{age}</li>
+              </ul>
+      )
+    }
+  }
+  //对标签属性进行类型、必要性的限制
+  Person.propTypes={
+    name:PropTypes.string.isRequired,
+    sex:PropTypes.string,
+    age:PropTypes.number,
+    speak:PropTypes.func
+  }
+  //指定默认标签属性值
+  Person.defaultProps={
+    sex:'不男不女',
+    age:18
+  }
+  // 渲染组件到页面
+  ReactDOM.render(<Person name ="jerry" age={19} speak={speak()} />,document.getElementById('test1'))
+  ReactDOM.render(<Person name ="tom" age={19} sex="女"/>,document.getElementById("test2"))
+  ReactDOM.render(<Person name ="Bob" age={20} sex="男"/>,document.getElementById("test3"))
+function speak(){
+
+    console.log("I'm talking ")
+}
+
+</script>
+</body>
+</html>
