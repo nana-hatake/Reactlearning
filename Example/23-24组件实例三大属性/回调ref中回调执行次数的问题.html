@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+ class Demo extends React.Component{
+    state ={isHot:false}
+   showinfo= ()=>{
+     const {input1}=this
+     alert(input1.value)
+   }
+   changeWeather=() =>{
+      const{isHot}=this.state
+      this.setState({isHot:!isHot})
+ }
+ //定义成class的绑定函数
+  saveInput = (c)=>{
+      this.input1=c
+    console.log('@',c);
+  }
+   render(){
+     const{isHot}=this.state
+     return <div>
+       <h2>今天天气很{isHot ? '炎热':'凉爽'}</h2> =
+       { /*内联函数的写法*/}
+       {/*<input ref ={(currentNode)=>{this.input1=currentNode;console.log('@',currentNode);}}  type="text"></input><br></br><br></br>*/}
+       <input ref={this.saveInput} type ="text"/><br></br><br></br>
+       <button onClick={this.showinfo}  >点我输出</button><br></br><br></br>
+       <button onClick={this.changeWeather}>点我改变天气</button>
+     </div>
+   }
+ }
+
+  // 渲染组件到页面
+  ReactDOM.render(<Demo/>,document.getElementById('test'))
+
+
+</script>
+</body>
+</html>

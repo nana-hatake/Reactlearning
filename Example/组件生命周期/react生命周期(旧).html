@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+
+  //生命周期回调函数 <=> 生命周期钩子函数 <=>生命周期函数 <=> 生命周期钩子
+ class Count extends React.Component {
+   //构造器
+   constructor(props) {
+     console.log('count-constructor')
+     super(props);
+     this.state = {count: 0}
+   }
+   add = () =>{
+     const{count}=this.state
+     this.setState ({count:count+1})
+   }
+   //组件将要挂载的钩子
+   componentWillMount(){
+     console.log('count-componentWillMount')
+   }
+   //组件挂载完毕的钩子
+   componentDidMount(){
+     console.log('count-componentDidMount')
+   }
+   //组件将要卸载的钩子
+   componentWillUnmount(){
+     //清除定时器
+     console.log('count-componentWillUnmount')
+   }
+   //控制组件更新的阀门
+   shouldComponentUpdate(){
+     console.log('count-shouldComponentUpdate')
+     return true
+   }
+   //组件将要更新
+   componentWillUpdate(){
+     console.log('count-componentWillUpdate')
+   }
+   //组件更新完成
+   componentDidUpdate(){
+     console.log('count-componentDidUpdate')
+   }
+  render(){
+    console.log('count-render')
+    const {count}=this.state
+    return(
+            <div>
+              <h2>当前和为{count}</h2>
+              <button onClick={this.add}>点我+1</button>
+            </div>
+    )
+  }
+
+
+ }
+ ReactDOM.render(<Count/>,document.getElementById('test'))
+
+</script>
+</body>
+</html>

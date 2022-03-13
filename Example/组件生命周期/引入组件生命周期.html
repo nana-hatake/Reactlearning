@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+
+  //生命周期回调函数 <=> 生命周期钩子函数 <=>生命周期函数 <=> 生命周期钩子
+ class Life extends React.Component{
+   state={opacity:0}
+   death =()=>{
+     //卸载组件
+     ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+   }
+   //组件挂载完毕后调用
+   componentDidMount(){
+    this.timer= setInterval(()=>{
+       //获取原状态
+       let {opacity} =this.state
+       opacity-=0.1
+       if(opacity<=0) opacity=1
+       this.setState({opacity})
+     },200)
+   }
+   componentWillUnmount(){
+     //清除定时器
+     clearInterval(this.timer)
+   }
+
+
+   //初始化渲染、状态更新后使用
+   render(){
+     return(
+             <div>
+               <h2 style={{opacity:this.state.opacity}}>React学不会怎么办</h2>
+               <button onClick={this.death}>不活了</button>
+             </div>
+     )
+   }
+ }
+ ReactDOM.render(<Life/>,document.getElementById('test'))
+
+</script>
+</body>
+</html>

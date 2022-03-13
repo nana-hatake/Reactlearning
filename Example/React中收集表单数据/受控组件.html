@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+  class Login extends React.Component{
+    state={
+      username:'',
+      password:''
+    }
+    handleSubmit=(event)=> {
+      event.preventDefault() //阻止表单提交
+      const {username, password} = this.state
+      alert(`你输入的用户名是:${username}，密码是${password}`)
+    }
+    saveUsername = (event)=>{
+      console.log(event.target.value);
+      this.setState({username:event.target.value}) //将用户名维护到state里面
+    }
+    savePassword = (event)=>{
+      console.log(event.target.value);
+      this.setState({password:event.target.value}) //将密码维护到state里面
+    }
+    render(){
+      return(
+        //随着输入维护状态--？受控组件
+              <form  onSubmit={this.handleSubmit} >
+                用户名：<input onChange={this.saveUsername} type="text" name="username"/>
+                密码：<input onChange={this.savePassword} type="text" name="password"/>
+                <button>登陆</button>
+              </form>
+      )
+    }
+  }
+  ReactDOM.render(<Login/>,document.getElementById('test'))
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+  class Demo extends React.Component{
+  // String类型的Ref存在一定程度上的效率问题 =》可以换成回调Ref或者CreateRef
+    showData = ()=>{
+    // console.log("#")
+    //   console.log(this.refs.input1)
+      const {input1} = this.refs
+      alert(input1.value)
+
+    }
+    render(){
+      return (
+        <div>
+          <input ref="input1" type="text" placeholder="点击按钮提示数据">
+          </input>&nbsp;
+          <button ref="button1" onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+          <input ref="input2" type ="text" placeholder="失去焦点提示数据"></input> &nbsp;
+        </div>
+      )
+    }
+
+  }
+
+
+  // 渲染组件到页面
+  ReactDOM.render(<Demo/>,document.getElementById('test'))
+
+
+</script>
+</body>
+</html>

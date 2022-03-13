@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数式组件</title>
+</head>
+<body>
+<!--准备好一个"容器" -->
+<div id ="test"></div>
+
+
+<!--引入react核心库，React-->
+<script type="text/javascript" src="../../js/react.development.js"></script>
+<!--引入react拓展库，ReactDOM-->
+<script type="text/javascript" src="../../js/react-dom.development.js"></script>
+<!--引入babel，用于将JSX转换为JS）-->
+<script type="text/javascript" src="../../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签进行限制，PropTypes-->
+<script type="text/javascript" src="../../js/prop-types.js"></script>
+<script type="text/babel">
+  class Demo extends React.Component{
+    showDatas=(event) =>{
+      alert(event.target.value)
+    }
+    render(){
+
+      return <div>
+
+
+        <input onBlur={this.showDatas} type ="text" placeholder="失去焦点提示数据"/><br></br><br></br>
+
+      </div>
+    }
+  }
+
+  // 渲染组件到页面
+  ReactDOM.render(<Demo/>,document.getElementById('test'))
+
+
+</script>
+</body>
+</html>
